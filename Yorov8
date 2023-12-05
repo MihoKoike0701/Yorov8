@@ -1,0 +1,17 @@
+from google.colab import drive
+drive.mount('/content/drive')
+%cd ./drive/MyDrive
+
+%cd /content/drive/MyDrive/colabo/demo_Yolov8
+
+#以下のコマンドでライブラリをインストールする
+!pip3 install ultralytics
+
+#Train
+!yolo detect train data=/content/drive/MyDrive/colabo/demo_Yolov8/cabbage_demo.v1i.yolov8/data.yaml model=yolov8n.pt epochs=20 imgsz=640 device=cpu batch=8 name=cabbage
+
+#Test
+!yolo detect pred!yolo detect predict mode ="/content/drive/MyDrive/colabo/demo_Yolov8/runs/detect/cabbage/weights/best.pt" source="/content/drive/MyDrive/colabo/demo_Yolov8/cabbage_demo.v1i.yolov8/valid/images" conf=0.25 iou=0.7 imgsz=640 save=True
+
+#Predict
+!yolo detect predict model="/content/drive/MyDrive/colabo/demo_Yolov8/runs/detect/cabbage/weights/best.pt" source="/content/drive/MyDrive/colabo/demo_Yolov8/datasets/images" conf=0.001 iou=0.7 imgsz=200 save=True hide_labels=True hide_conf=True
