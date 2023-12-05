@@ -18,3 +18,7 @@ from sklearn.model_selection import train_test_split
 
 #小数点第三位まで表示
 %precision 3
+
+#ドライブへの接続
+from google.colab import drive
+drive.mount('/content/drive')
